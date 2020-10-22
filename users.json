@@ -1,1 +1,13 @@
-{"users":[{"id":1,"username":"minhtriet2104","password":"1"},{"id":2,"username":"nhutran","password":"1"},{"id":3,"username":"giangvuong","password":"1"},{"id":4,"username":"huyenngoc","password":"1"},{"id":5,"username":"xuanvan","password":"1"}],"refreshTokens":["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmh0cmlldDIxMDQiLCJwYXNzd29yZCI6IjEiLCJpYXQiOjE2MDMzNzkzMTR9.xtiM2qIO4HPFcB0BC12miJKuVpE5Nrw_5bbO_SA6LcY","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmh0cmlldDIxMDQiLCJwYXNzd29yZCI6IjEiLCJpYXQiOjE2MDMzNzk5NzB9.jcbGDn0t0bK3JWUxrc0qHqaRXnkg06A5gzdg8Wrsjuk"]}
+{
+  "users": [
+    { "id": 1, "username": "minhtriet2104", "password": "1" },
+    { "id": 2, "username": "nhutran", "password": "1" },
+    { "id": 3, "username": "giangvuong", "password": "1" },
+    { "id": 4, "username": "huyenngoc", "password": "1" },
+    { "id": 5, "username": "xuanvan", "password": "1" }
+  ],
+  "refreshTokens": [
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmh0cmlldDIxMDQiLCJwYXNzd29yZCI6IjEiLCJpYXQiOjE2MDMzNzkzMTR9.xtiM2qIO4HPFcB0BC12miJKuVpE5Nrw_5bbO_SA6LcY",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmh0cmlldDIxMDQiLCJwYXNzd29yZCI6IjEiLCJpYXQiOjE2MDMzNzk5NzB9.jcbGDn0t0bK3JWUxrc0qHqaRXnkg06A5gzdg8Wrsjuk"
+  ]
+}

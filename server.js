@@ -18,7 +18,7 @@ app.use(cors());
 
 const SECRET_KEY_TOKEN = process.env.SECRET_KEY_TOKEN;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
-const expiresIn = "20s";
+const expiresIn = "30s";
 
 // Create an access token from a payload
 function createAccessToken(payload) {
