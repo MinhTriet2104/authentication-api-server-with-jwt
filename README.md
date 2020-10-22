@@ -12,7 +12,7 @@ body: {
 
 Response: {
   "accessToken": "...token",
-    "refreshToken": "...token"
+  "refreshToken": "...token"
 }
 ```
 
