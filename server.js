@@ -182,9 +182,6 @@ app.post("/auth/refresh", (req, res) => {
 
 // delete refresh token
 app.delete("/auth/logout", (req, res) => {
-  refreshTokens = refreshTokens.filter(
-    (refreshToken) => refreshToken !== req.body.refreshToken
-  );
   fs.readFile("./users.json", (err, data) => {
     if (err) {
       const status = 401;

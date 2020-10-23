@@ -43,6 +43,14 @@ Response: {
 }
 ```
 
+# Logout
+```js
+DELETE: "http://localhost:8080/auth/logout"
+body: {
+	"refreshToken": "...token",
+}
+```
+
 # Test Token get Users
 ```js
 GET: "http://localhost:8080/users"
