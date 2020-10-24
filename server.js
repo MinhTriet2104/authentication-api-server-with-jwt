@@ -101,9 +101,10 @@ app.post("/auth/register", (req, res) => {
     const message = "Username and Password already exist";
     
     if (!oauth2) {
-      isExistOAuth2 = true;
       res.status(status).json({ status, message });
       return;
+    } else {
+      isExistOAuth2 = true;
     }
   }
 
