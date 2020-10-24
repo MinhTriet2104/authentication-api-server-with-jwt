@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors"); // cors
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 // get users database
 const { users, refreshTokens } = JSON.parse(
@@ -39,9 +40,8 @@ function verifyToken(req, res, next) {
   if (token == null) return res.sendStatus(401);
 
   jwt.verify(token, process.env.SECRET_KEY_TOKEN, (err, user) => {
-    console.log(err);
     if (err) return res.sendStatus(403);
-    req.user = user;
+    req.user = users.find((item) => item.username === user.username);
     next();
   });
 }
@@ -215,6 +215,17 @@ app.delete("/auth/logout", (req, res) => {
 // test token
 app.get("/users", verifyToken, (req, res) => {
   res.status(200).json(users);
+});
+
+app.post("/superlike", verifyToken, async (req, res) => {
+  try {
+    const API_URL = "https://5f892e6d18c33c0016b30683.mockapi.io/";
+    if (!req.user.isVip) res.status(403);
+    const cat = await axios.post(API_URL + "superlikes", req.body.cat);
+    res.status(200).json(cat.data);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.listen(8080, () => console.log("Run Auth API Server"));
