@@ -1,3 +1,9 @@
+# Cài đặt
+
+```js
+npm install
+```
+
 # Mở Server
 
 Chạy file start_server.bat
