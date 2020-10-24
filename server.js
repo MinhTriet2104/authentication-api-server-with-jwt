@@ -121,6 +121,7 @@ app.post("/auth/register", (req, res) => {
       id: lastId + 1,
       username: username,
       password: password,
+      isVip: false,
     }); //add some data
 
     fs.writeFile("./users.json", JSON.stringify(data), (err, result) => {
