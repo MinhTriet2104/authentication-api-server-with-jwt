@@ -220,7 +220,7 @@ app.get("/users", verifyToken, (req, res) => {
 app.post("/superlike", verifyToken, async (req, res) => {
   try {
     const API_URL = "https://5f892e6d18c33c0016b30683.mockapi.io/";
-    if (!req.user.isVip) res.status(403);
+    if (!req.user.isVip) return res.sendStatus(403);
     const cat = await axios.post(API_URL + "superlikes", req.body.cat);
     res.status(200).json(cat.data);
   } catch (err) {
