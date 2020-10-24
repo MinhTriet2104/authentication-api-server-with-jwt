@@ -47,15 +47,7 @@ function verifyToken(req, res, next) {
 }
 
 // Check if the user exists in database
-function isAuthenticated({ username, password }, oauth2) {
-  if (oauth2) {
-    const accessToken = createAccessToken({ username, password });
-    const refreshToken = createRefreshToken({ username, password });
-    console.log("Access Token: " + accessToken);
-    console.log("Refresh Token: " + refreshToken);
-    res.status(200).json({ accessToken, refreshToken });
-  }
-
+function isAuthenticated({ username, password }) {
   return (
     users.findIndex(
       (user) => user.username === username && user.password === password
@@ -102,47 +94,53 @@ app.post("/auth/register", (req, res) => {
   console.log(req.body);
 
   const { username, password, oauth2 } = req.body;
+  let isExistOAuth2 = false;
 
-  if (isAuthenticated({ username, password }, oauth2)) {
+  if (isAuthenticated({ username, password })) {
     const status = 401;
     const message = "Username and Password already exist";
-    res.status(status).json({ status, message });
-    return;
-  }
-
-  fs.readFile("./users.json", (err, data) => {
-    if (err) {
-      const status = 401;
-      const message = err;
+    
+    if (!oauth2) {
+      isExistOAuth2 = true;
       res.status(status).json({ status, message });
       return;
     }
+  }
 
-    // Get current users data
-    data = JSON.parse(data.toString());
-
-    // Get the id of last user
-    const lastId = data.users[data.users.length - 1].id;
-
-    //Add new user
-    data.users.push({
-      id: lastId + 1,
-      username: username,
-      password: password,
-      isVip: false,
-    }); //add some data
-
-    fs.writeFile("./users.json", JSON.stringify(data), (err, result) => {
-      // WRITE
+  if (!isExistOAuth2) {
+    fs.readFile("./users.json", (err, data) => {
       if (err) {
         const status = 401;
         const message = err;
         res.status(status).json({ status, message });
         return;
       }
-    });
-  });
 
+      // Get current users data
+      data = JSON.parse(data.toString());
+
+      // Get the id of last user
+      const lastId = data.users[data.users.length - 1].id;
+
+      //Add new user
+      data.users.push({
+        id: lastId + 1,
+        username: username,
+        password: password,
+        isVip: false,
+      }); //add some data
+
+      fs.writeFile("./users.json", JSON.stringify(data), (err, result) => {
+        // WRITE
+        if (err) {
+          const status = 401;
+          const message = err;
+          res.status(status).json({ status, message });
+          return;
+        }
+      });
+    });
+  }
   // Create token for new user
   const accessToken = createAccessToken({ username, password });
   const refreshToken = createRefreshToken({ username, password });
