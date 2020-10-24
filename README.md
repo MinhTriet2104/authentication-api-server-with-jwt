@@ -11,9 +11,10 @@ Chạy file start_server.bat
 # Login
 ```js
 POST: "http://localhost:8080/auth/login"
+
 body: {
-	"username": "minhtriet2104",
-	"password": "1"
+  "username": "minhtriet2104",
+  "password": "1"
 }
 
 Response: {
@@ -26,7 +27,7 @@ Response: {
 ```js
 POST: "http://localhost:8080/auth/register"
 body: {
-	"username": "minhtriet2104",
+  "username": "minhtriet2104",
   "password": "1",
   [oauth2: true/false]
 }
@@ -42,7 +43,7 @@ Response: {
 ```js
 POST: "http://localhost:8080/auth/refresh"
 body: {
-	"refreshToken": "...token",
+  "refreshToken": "...token",
 }
 
 Response: {
@@ -54,7 +55,7 @@ Response: {
 ```js
 DELETE: "http://localhost:8080/auth/logout"
 body: {
-	"refreshToken": "...token",
+  "refreshToken": "...token",
 }
 ```
 
