@@ -47,7 +47,15 @@ function verifyToken(req, res, next) {
 }
 
 // Check if the user exists in database
-function isAuthenticated({ username, password }) {
+function isAuthenticated({ username, password }, oauth2) {
+  if (oauth2) {
+    const accessToken = createAccessToken({ username, password });
+    const refreshToken = createRefreshToken({ username, password });
+    console.log("Access Token: " + accessToken);
+    console.log("Refresh Token: " + refreshToken);
+    res.status(200).json({ accessToken, refreshToken });
+  }
+
   return (
     users.findIndex(
       (user) => user.username === username && user.password === password
@@ -93,9 +101,9 @@ app.post("/auth/register", (req, res) => {
   console.log("register endpoint called; request body:");
   console.log(req.body);
 
-  const { username, password } = req.body;
+  const { username, password, oauth2 } = req.body;
 
-  if (isAuthenticated({ username, password }) === true) {
+  if (isAuthenticated({ username, password }, oauth2)) {
     const status = 401;
     const message = "Username and Password already exist";
     res.status(status).json({ status, message });
