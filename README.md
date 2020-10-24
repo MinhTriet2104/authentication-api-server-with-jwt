@@ -27,7 +27,8 @@ Response: {
 POST: "http://localhost:8080/auth/register"
 body: {
 	"username": "minhtriet2104",
-	"password": "1"
+  "password": "1",
+  [oauth2: true/false]
 }
 
 Response: {
