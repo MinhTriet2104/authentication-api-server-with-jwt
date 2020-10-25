@@ -40,7 +40,14 @@ function verifyToken(req, res, next) {
   if (token == null) return res.sendStatus(401);
 
   jwt.verify(token, process.env.SECRET_KEY_TOKEN, (err, user) => {
-    if (err) return res.sendStatus(403);
+    if (err && err.name === "TokenExpiredError") {
+      return res.json({ status: 401, err: err.name });
+    }
+
+    if (err) {
+      return res.status(403).json(err);
+    }
+    
     req.user = users.find((item) => item.username === user.username);
     next();
   });
