@@ -47,7 +47,7 @@ function verifyToken(req, res, next) {
     if (err) {
       return res.status(403).json(err);
     }
-    
+
     req.user = users.find((item) => item.username === user.username);
     next();
   });
@@ -80,14 +80,15 @@ function addRefreshTokenToDb(refreshToken) {
       // Add new refresh token
       data.refreshTokens.push(refreshToken);
 
-      fs.writeFile("./users.json", JSON.stringify(data), (err, result) => {
+      fs.writeFile("users.json", JSON.stringify(data), (err, result) => {
         // WRITE
         if (err) {
           const status = 401;
           const message = err;
-          res.status(status).json({ status, message });
-          return;
+          return res.status(status).json({ status, message });
         }
+
+        console.log(result);
       });
     });
   }
@@ -106,7 +107,7 @@ app.post("/auth/register", (req, res) => {
   if (isAuthenticated({ username, password })) {
     const status = 401;
     const message = "Username and Password already exist";
-    
+
     if (!oauth2) {
       res.status(status).json({ status, message });
       return;
@@ -138,7 +139,7 @@ app.post("/auth/register", (req, res) => {
         isVip: false,
       }); //add some data
 
-      fs.writeFile("./users.json", JSON.stringify(data), (err, result) => {
+      fs.writeFileSync("./users.json", JSON.stringify(data), (err, result) => {
         // WRITE
         if (err) {
           const status = 401;
@@ -146,15 +147,16 @@ app.post("/auth/register", (req, res) => {
           res.status(status).json({ status, message });
           return;
         }
+
+        // Create token for new user
+        const accessToken = createAccessToken({ username, password });
+        const refreshToken = createRefreshToken({ username, password });
+        console.log("Access Token: " + accessToken);
+        console.log("Refresh Token: " + refreshToken);
+        res.status(200).json({ accessToken, refreshToken });
       });
     });
   }
-  // Create token for new user
-  const accessToken = createAccessToken({ username, password });
-  const refreshToken = createRefreshToken({ username, password });
-  console.log("Access Token: " + accessToken);
-  console.log("Refresh Token: " + refreshToken);
-  res.status(200).json({ accessToken, refreshToken });
 });
 
 // Login to one of the users from ./users.json
@@ -235,7 +237,7 @@ app.get("/users", verifyToken, (req, res) => {
 app.post("/superlike", verifyToken, async (req, res) => {
   try {
     const API_URL = "https://5f892e6d18c33c0016b30683.mockapi.io/";
-    if (!req.user.isVip) return res.sendStatus(403);
+    if (req.user && !req.user.isVip) return res.sendStatus(403);
     const cat = await axios.post(API_URL + "superlikes", req.body.cat);
     res.status(200).json(cat.data);
   } catch (err) {
