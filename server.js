@@ -139,7 +139,7 @@ app.post("/auth/register", (req, res) => {
         isVip: false,
       }); //add some data
 
-      fs.writeFileSync("./users.json", JSON.stringify(data), (err, result) => {
+      fs.writeFile("./users.json", JSON.stringify(data), (err, result) => {
         // WRITE
         if (err) {
           const status = 401;

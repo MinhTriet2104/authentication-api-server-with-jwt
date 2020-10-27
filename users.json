@@ -1,10 +1,1 @@
-{
-  "users": [
-    { "id": 1, "username": "minhtriet2104", "password": "1", "isVip": true },
-    { "id": 2, "username": "nhutran", "password": "1", "isVip": false },
-    { "id": 3, "username": "giangvuong", "password": "1", "isVip": false },
-    { "id": 4, "username": "huyenngoc", "password": "1", "isVip": false },
-    { "id": 5, "username": "xuanvan", "password": "1", "isVip": false }
-  ],
-  "refreshTokens": []
-}
+{"users":[{"id":1,"username":"minhtriet2104","password":"1","isVip":true},{"id":2,"username":"nhutran","password":"1","isVip":false},{"id":3,"username":"giangvuong","password":"1","isVip":false},{"id":4,"username":"huyenngoc","password":"1","isVip":false},{"id":5,"username":"xuanvan","password":"1","isVip":false},{"id":6,"username":"test2","password":"1","isVip":false}],"refreshTokens":["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QyIiwicGFzc3dvcmQiOiIxIiwiaWF0IjoxNjAzODExMzYxfQ.xIcpqzjxWMnCZBCMoUb9Xk1IufmQ-fytSdWnMMRRT-w"]}
